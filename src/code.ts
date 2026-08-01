@@ -20,7 +20,9 @@ export const registerCode = (ctx: PluginCtx) => {
       try {
         ctx.logger.info(`[RunJavaScript] 执行代码: \n${code}`)
         const sandbox = {
-          ...fraq,
+          ...global,
+          ...globalThis,
+          fraq,
           ctx,
           session,
           console,
@@ -29,6 +31,8 @@ export const registerCode = (ctx: PluginCtx) => {
           clearTimeout,
           clearInterval,
           Buffer,
+          global,
+          globalThis,
           process,
         }
         const result = await RunJs(code, sandbox)
