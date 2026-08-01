@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+  build-publish-npm:
+    needs: [release-please]
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 导入构建产物
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        name: 安装node24
+        with:
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
+      - run: npm install npm@latest -g
+        name: 安装最新npm
+      - run: npm install --force
+        name: 安装依赖
+
+      - run: npm run build
+        name: 编译
+      - run: npm pkg delete devDependencies
+        name: 删除开发依赖
+      - name: 发布 到 npm
+        run: npm publish --access public
