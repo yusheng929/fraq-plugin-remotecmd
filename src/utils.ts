@@ -1,4 +1,5 @@
 import type { Context } from '@fraqjs/fraq'
+import type { TakumiService } from '@fraqjs/plugin-takumi'
 import type { Master } from 'fraq-plugin-master'
 
 import pkg from '../package.json'
@@ -7,7 +8,7 @@ import { spawn } from 'node:child_process'
 import os from 'node:os'
 import vm from 'node:vm'
 
-/** 注入 master 服务后的插件上下文（takumi 为可选依赖，不作为注入条件，由注册函数单独接收） */
+/** 注入 master 服务后的插件上下文（takumi 为可选依赖，不作为注入条件，经 resolveTakumi 按需解析） */
 export type PluginCtx = Context & { master: InstanceType<typeof Master> }
 
 export interface RunShellResult {
@@ -21,6 +22,20 @@ export interface RunShellResult {
 
 /** 插件名（取自 package.json） */
 export const pluginName = pkg.name
+
+/**
+ * 动态加载并解析 TakumiService
+ * - takumi 是可选依赖，静态 import 会在未安装 @fraqjs/plugin-takumi 时直接导致插件加载失败
+ * - 返回 undefined 表示未安装或对应插件尚未加载该服务
+ */
+export const resolveTakumi = async (ctx: Context): Promise<TakumiService | undefined> => {
+  try {
+    const { TakumiService } = await import('@fraqjs/plugin-takumi')
+    return ctx.tryResolve(TakumiService)
+  } catch {
+    return undefined
+  }
+}
 
 /** ANSI SGR 前景色码到 CSS 颜色的映射（适配浅色背景） */
 const ANSI_FG: Record<number, string> = {

@@ -1,16 +1,15 @@
 import * as fraq from '@fraqjs/fraq'
 import { param, seg } from '@fraqjs/fraq'
-import type { TakumiService } from '@fraqjs/plugin-takumi'
 import hljs from 'highlight.js'
 import shell from 'highlight.js/lib/languages/powershell'
 
-import { formatLine, type PluginCtx, RunJs, runShell, stripAnsi } from './utils'
+import { formatLine, type PluginCtx, RunJs, resolveTakumi, runShell, stripAnsi } from './utils'
 
 import os from 'node:os'
 
 hljs.registerLanguage('powershell', shell)
 
-export const registerCode = (ctx: PluginCtx, takumi?: TakumiService) => {
+export const registerCode = (ctx: PluginCtx) => {
   const router = ctx.router.filter((session) => ctx.master.isMaster(session.raw.sender_id))
 
   router
@@ -65,6 +64,8 @@ export const registerCode = (ctx: PluginCtx, takumi?: TakumiService) => {
       const displayPath = os.platform() === 'win32' ? `${cwd}>` : cwd.replace(/^\/root/, '~')
       const symbol = username === 'root' ? '#' : '$'
       const { output } = await runShell(ctx, cmd)
+      /** takumi 服务在命令执行时按需解析，与插件 apply 顺序解耦 */
+      const takumi = isPic ? await resolveTakumi(ctx) : undefined
       if (isPic && takumi) {
         /** render 依赖 @takumi-rs/helpers，懒加载以避免未安装 takumi 时插件加载失败 */
         const { render } = await import('./render')

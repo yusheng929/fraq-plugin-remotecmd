@@ -1,10 +1,9 @@
-import { type Context, definePlugin } from '@fraqjs/fraq'
-import type { TakumiService } from '@fraqjs/plugin-takumi'
+import { definePlugin } from '@fraqjs/fraq'
 import { Master } from 'fraq-plugin-master'
 
 import { registerCode } from './code'
 import { registerSnapcode } from './snapcode'
-import { pluginName } from './utils'
+import { pluginName, resolveTakumi } from './utils'
 
 import { createRequire } from 'node:module'
 
@@ -18,28 +17,20 @@ const jetbrainsMono = [
   },
 ]
 
-/**
- * 动态加载并解析 TakumiService
- * - takumi 是可选依赖，静态 import 会在未安装 @fraqjs/plugin-takumi 时直接导致插件加载失败
- * - 返回 undefined 表示未安装或未加载该插件
- */
-const resolveTakumi = async (ctx: Context): Promise<TakumiService | undefined> => {
-  try {
-    const { TakumiService } = await import('@fraqjs/plugin-takumi')
-    return ctx.tryResolve(TakumiService)
-  } catch {
-    return undefined
-  }
-}
-
 export const RunCmdPlugin = definePlugin({
   name: pluginName,
   inject: {
     master: Master,
   },
-  async apply (ctx) {
+  apply (ctx) {
+    registerCode(ctx)
+  },
+  /**
+   * takumi 服务在其插件的 apply 中 provide，框架保证所有插件 apply 完成后才执行 start，
+   * 因此在这里解析 takumi 才不会受插件 apply 顺序影响
+   */
+  async start (ctx) {
     const takumi = await resolveTakumi(ctx)
-    registerCode(ctx, takumi)
     if (!takumi) {
       ctx.logger.warn('未检测到 @fraqjs/plugin-takumi,rcp / sc 图片渲染功能已禁用（rc / rjs 不受影响）')
       return
