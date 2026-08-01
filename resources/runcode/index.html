@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fraq remotecmd</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="window">
+    <!-- Title bar -->
+    <div class="titlebar">
+      <div class="lights">
+        <span class="light light-red"></span>
+        <span class="light light-yellow"></span>
+        <span class="light light-green"></span>
+      </div>
+      <div class="titlebar-title">命令执行框</div>
+      <div class="titlebar-meta">
+        <span class="meta-key">⌘</span>
+        <span class="meta-time">{{data.time}}</span>
+      </div>
+    </div>
+
+    <!-- Command panel -->
+    <div class="cmd-panel">
+      <pre class="cmd-source"><span class="p-user">{{data.user}}@{{data.host}}</span><span class="p-path">:{{data.path}}{{data.symbol}} </span>{{@ data.cmd}}</pre>
+      <div class="enter-key">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 10 4 15 9 20" />
+          <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Output panel -->
+    <div class="out-panel">{{@ data.outputHtml}}</div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span class="footer-name">fraq-plugin-remotecmd</span>
+      <span class="footer-copy">{{sys.copyright}}</span>
+    </div>
+  </div>
+</body>
+
+</html>

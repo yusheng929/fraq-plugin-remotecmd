@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码快照</title>
+  <link rel="stylesheet" href="./github-dark.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="controls">
+        <div class="control close"></div>
+        <div class="control minimize"></div>
+        <div class="control maximize"></div>
+      </div>
+      <div class="title">{{data.fileName}} <span class="title-range">({{data.rangeText}} / {{data.totalLines}})</span>
+      </div>
+    </div>
+    <div class="content">
+      <pre class="code-block"><code class="hljs">{{@ data.codeHtml}}</code></pre>
+    </div>
+    <div class="footer">
+      <div class="copyright">{{@ sys.copyright}}</div>
+    </div>
+  </div>
+</body>
+
+</html>

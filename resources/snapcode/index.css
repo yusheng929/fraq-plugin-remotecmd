@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  padding: 40px;
+  background: transparent;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  display: inline-block;
+}
+
+.window {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  min-width: 600px;
+  max-width: 1200px;
+}
+
+.title-bar {
+  background: #161b22;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #30363d;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.close {
+  background: #ff5f56;
+}
+
+.minimize {
+  background: #ffbd2e;
+}
+
+.maximize {
+  background: #27c93f;
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #8b949e;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.content {
+  padding: 20px 0;
+  background: #0d1117;
+}
+
+.code-block {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace !important;
+}
+
+.code-line {
+  display: flex;
+  line-height: 1.6;
+  padding: 0 10px;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace !important;
+}
+
+.code-line:hover {
+  background: #161b22;
+}
+
+.line-number {
+  color: #6e7681;
+  text-align: right;
+  padding-right: 15px;
+  min-width: 40px;
+  user-select: none;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace !important;
+}
+
+.line-content {
+  color: #c9d1d9;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace !important;
+}
+
+.footer {
+  background: #161b22;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  color: #6e7681;
+  font-size: 12px;
+  border-top: 1px solid #30363d;
+}
+
+.title-range {
+  opacity: 0.6;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+/* Override highlight.js background */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Force straight quotes and non-italic strings */
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition,
+.hljs-deletion,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-meta,
+.hljs-comment,
+.hljs-quote {
+  font-style: normal !important;
+  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace !important;
+}
+
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition,
+.hljs-deletion,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-meta {
+  font-style: normal !important;
+}

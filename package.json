@@ -1,0 +1,65 @@
+{
+  "name": "fraq-plugin-remotecmd",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "基于fraq编写的通过Bot远程执行shell和js命令",
+  "files": [
+    "dist",
+    "resources",
+    "package.json",
+    "README.md"
+  ],
+  "main": "dist/index.mjs",
+  "typings": "dist/index.d.mts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsx test/smoke.ts"
+  },
+  "keywords": [
+    "fraq",
+    "fraq-plugin"
+  ],
+  "author": "瑜笙",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yusheng929/fraq-plugin-remotecmd"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@11.15.1",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.4",
+    "@takumi-rs/core": "^2.5.4",
+    "@takumi-rs/helpers": "^2.5.4",
+    "@types/node": "^24.13.3",
+    "dotenv": "^17.4.2",
+    "react": "^19.2.8",
+    "tsdown": "^0.22.12",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "@fraqjs/fraq": "^0.14.1",
+    "@fraqjs/plugin-takumi": "^0.4.1",
+    "@takumi-rs/core": "^2.5.4",
+    "@takumi-rs/helpers": "^2.5.4",
+    "fraq-plugin-master": "^1.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@fraqjs/plugin-takumi": {
+      "optional": true
+    },
+    "@takumi-rs/core": {
+      "optional": true
+    },
+    "@takumi-rs/helpers": {
+      "optional": true
+    }
+  },
+  "fraq": {
+    "category": "utilities"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "highlight.js": "^11.11.1"
+  }
+}

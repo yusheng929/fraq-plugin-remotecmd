@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.npmrc
+.DS_Store/
+.idea/
+.env
+.env.local
+.env.*.local
+config/
