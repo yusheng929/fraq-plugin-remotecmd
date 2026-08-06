@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.1...v1.0.2) (2026-08-06)
+
+
+### Bug Fixes
+
+* 优化可选依赖加载 ([41ad406](https://github.com/yusheng929/fraq-plugin-remotecmd/commit/41ad4061b7189b61ec097825f9050dc3e82fbbda))
+
 ## [1.0.1](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.0...v1.0.1) (2026-08-01)
 
 
