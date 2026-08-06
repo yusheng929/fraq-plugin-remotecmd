@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.2...v1.0.3) (2026-08-06)
+
+
+### Bug Fixes
+
+* 修复rjs注入global，修复未导出的问题 ([4e19389](https://github.com/yusheng929/fraq-plugin-remotecmd/commit/4e1938984218c5b4515215abc24c40cda5cbc497))
+
 ## [1.0.2](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.1...v1.0.2) (2026-08-06)
 
 
