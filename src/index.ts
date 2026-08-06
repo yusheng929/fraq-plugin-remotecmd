@@ -24,7 +24,7 @@ export const RunCmdPlugin = definePlugin({
     master: Master,
   },
   optionalInject: {
-    takumi: serviceToken<TakumiService>('takumi/TakumiService'),
+    takumi: serviceToken<TakumiService>('fraqjs/takumi/TakumiService'),
   },
   async apply (ctx) {
     registerCode(ctx)
