@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.3...v1.0.4) (2026-08-06)
+
+
+### Bug Fixes
+
+* 我是大笨蛋 ([d9eebf3](https://github.com/yusheng929/fraq-plugin-remotecmd/commit/d9eebf3db3f9a6200ef6360e78a4b2cb68706be6))
+
 ## [1.0.3](https://github.com/yusheng929/fraq-plugin-remotecmd/compare/v1.0.2...v1.0.3) (2026-08-06)
 
 
