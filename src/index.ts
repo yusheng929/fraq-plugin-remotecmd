@@ -1,11 +1,12 @@
-import { definePlugin } from '@fraqjs/fraq'
+import { definePlugin, serviceToken } from '@fraqjs/fraq'
 import { Master } from 'fraq-plugin-master'
 
 import { registerCode } from './code'
 import { registerSnapcode } from './snapcode'
-import { pluginName, resolveTakumi } from './utils'
+import { pluginName } from './utils'
 
 import { createRequire } from 'node:module'
+import { TakumiService } from '@fraqjs/plugin-takumi'
 
 const require = createRequire(import.meta.url)
 
@@ -22,21 +23,17 @@ export const RunCmdPlugin = definePlugin({
   inject: {
     master: Master,
   },
-  apply (ctx) {
-    registerCode(ctx)
+  optionalInject: {
+    takumi: serviceToken<TakumiService>('takumi/TakumiService'),
   },
-  /**
-   * takumi 服务在其插件的 apply 中 provide，框架保证所有插件 apply 完成后才执行 start，
-   * 因此在这里解析 takumi 才不会受插件 apply 顺序影响
-   */
-  async start (ctx) {
-    const takumi = await resolveTakumi(ctx)
-    if (!takumi) {
-      ctx.logger.warn('未检测到 @fraqjs/plugin-takumi,rcp / sc 图片渲染功能已禁用（rc / rjs 不受影响）')
-      return
+  async apply (ctx) {
+    registerCode(ctx)
+    if (!ctx.takumi) {
+      ctx.logger.warn('未检测到 @fraqjs/plugin-takumi,rcp / sc 图片渲染功能已禁用')
+    } else {
+      await ctx.takumi.registerFontFamily('JetBrains Mono', jetbrainsMono)
+      registerSnapcode(ctx)
     }
-    await takumi.registerFontFamily('JetBrains Mono', jetbrainsMono)
-    registerSnapcode(ctx, takumi)
   },
 })
 

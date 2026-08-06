@@ -12,14 +12,14 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0
       '@fraqjs/fraq':
-        specifier: ^0.14.1
-        version: 0.14.1
+        specifier: ^0.16.1
+        version: 0.16.1
       '@fraqjs/plugin-takumi':
-        specifier: ^0.4.1
-        version: 0.4.1(@fraqjs/fraq@0.14.1)(react@19.2.8)
+        specifier: ^0.5.0
+        version: 0.5.0(@fraqjs/fraq@0.16.1)(react@19.2.8)
       fraq-plugin-master:
-        specifier: ^1.0.2
-        version: 1.0.2(@fraqjs/fraq@0.14.1)
+        specifier: ^1.1.1
+        version: 1.1.1(@fraqjs/fraq@0.16.1)
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
@@ -275,14 +275,14 @@ packages:
   '@fontsource-variable/jetbrains-mono@5.3.0':
     resolution: {integrity: sha512-F32xpS2NsGYoQi2ADSkKTgpJj7ozajsGgDJ8woTnqjmIB+dxDIqImjl4pXZVEExu8UFZ2ndhmX18EBS/hdz3Lw==}
 
-  '@fraqjs/fraq@0.14.1':
-    resolution: {integrity: sha512-oDmvoUeoa2m8DFC6mu9cb81tQuWcUm6usJAqa7/ZQ1QjX/Wqdsf9ZQNybdehKr99bviphaAJPghFCPWzf8Mb3g==}
+  '@fraqjs/fraq@0.16.1':
+    resolution: {integrity: sha512-EfB9AYfwufhVNud6GDzjdEd0DLwR/x0IIv1YMmr65Ul20aptiaIt6NPpCyv1778i9ISDscvtTwY4B/ydlEsrfQ==}
     engines: {node: '>=22'}
 
-  '@fraqjs/plugin-takumi@0.4.1':
-    resolution: {integrity: sha512-yrRH5dJ3b1mc3+2cChWKuZtXzM47K9/5hwLPoA9NcTC36wsenTokt4Ye5ITBxOEzh087GBwlNyfASyyLFjYcQA==}
+  '@fraqjs/plugin-takumi@0.5.0':
+    resolution: {integrity: sha512-rieNnlgRP07aCvtJ0AxmHwshfU88CTHZ9bTQgziIhF4RvH0fLfJLMAy9hBaCvwsnPXgm+/aH5IwqwmBcD2/q7A==}
     peerDependencies:
-      '@fraqjs/fraq': ^0.14.0
+      '@fraqjs/fraq': ^0.16.0
       react: ^19.0.0
 
   '@fraqjs/takumi-builtin-fonts@1.0.0':
@@ -626,10 +626,10 @@ packages:
       picomatch:
         optional: true
 
-  fraq-plugin-master@1.0.2:
-    resolution: {integrity: sha512-Ak5FaAus7+gttW0q/kqQcu3Oup50Kh4V+GW24c9XE33QzQ4UWzVGFqZKYkN9VoghTu2fBHhFNMBfatD1BTgEhg==}
+  fraq-plugin-master@1.1.1:
+    resolution: {integrity: sha512-GtwY5wJen5ZhLSXY+qJq29PGWJinTijBFOvNGyrA0OdVXePHQnYpz+w6sU+6v3JFV3BftYpP6GyMdPp7A+yKhQ==}
     peerDependencies:
-      '@fraqjs/fraq': ^0.14.1
+      '@fraqjs/fraq': ^0.16.1
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -911,13 +911,13 @@ snapshots:
 
   '@fontsource-variable/jetbrains-mono@5.3.0': {}
 
-  '@fraqjs/fraq@0.14.1':
+  '@fraqjs/fraq@0.16.1':
     dependencies:
       mitt: 3.0.1
 
-  '@fraqjs/plugin-takumi@0.4.1(@fraqjs/fraq@0.14.1)(react@19.2.8)':
+  '@fraqjs/plugin-takumi@0.5.0(@fraqjs/fraq@0.16.1)(react@19.2.8)':
     dependencies:
-      '@fraqjs/fraq': 0.14.1
+      '@fraqjs/fraq': 0.16.1
       '@fraqjs/takumi-builtin-fonts': 1.0.0
       '@takumi-rs/core': 2.5.4(react@19.2.8)
       '@takumi-rs/helpers': 2.5.4(react@19.2.8)
@@ -1162,9 +1162,9 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.5
 
-  fraq-plugin-master@1.0.2(@fraqjs/fraq@0.14.1):
+  fraq-plugin-master@1.1.1(@fraqjs/fraq@0.16.1):
     dependencies:
-      '@fraqjs/fraq': 0.14.1
+      '@fraqjs/fraq': 0.16.1
       chokidar: 5.0.0
 
   fsevents@2.3.3:

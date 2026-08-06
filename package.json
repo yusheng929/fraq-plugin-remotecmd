@@ -28,7 +28,6 @@
   "packageManager": "pnpm@11.15.1",
   "devDependencies": {
     "@biomejs/biome": "^2.5.4",
-    "@fraqjs/plugin-takumi": "^0.4.1",
     "@takumi-rs/core": "^2.5.4",
     "@takumi-rs/helpers": "^2.5.4",
     "@types/node": "^24.13.3",
@@ -39,12 +38,16 @@
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@fraqjs/fraq": "^0.14.1",
+    "@fraqjs/fraq": "^0.16.1",
+    "@fraqjs/plugin-takumi": "^0.5.0",
     "@takumi-rs/core": "^2.5.4",
     "@takumi-rs/helpers": "^2.5.4",
-    "fraq-plugin-master": "^1.0.2"
+    "fraq-plugin-master": "^1.1.1"
   },
   "peerDependenciesMeta": {
+    "@fraqjs/plugin-takumi": {
+      "optional": true
+    },
     "@takumi-rs/core": {
       "optional": true
     },

@@ -1,6 +1,5 @@
 import type { Session } from '@fraqjs/fraq'
 import { param, seg } from '@fraqjs/fraq'
-import type { TakumiService } from '@fraqjs/plugin-takumi'
 import hljs from 'highlight.js'
 import bash from 'highlight.js/lib/languages/bash'
 import c from 'highlight.js/lib/languages/c'
@@ -135,19 +134,19 @@ const resolveTargetPath = (raw: string): string | null => {
 }
 
 /** 注册 sc 命令（仅在有 takumi 时调用，见 index.ts） */
-export const registerSnapcode = (ctx: PluginCtx, takumi: TakumiService) => {
+export const registerSnapcode = (ctx: PluginCtx) => {
   ctx.router
     .filter((session) => ctx.master.isMaster(session.raw.sender_id))
     .command('sc')
     .arg('rest', param.greedy())
-    .execute((session, { rest }) => snapcode(ctx, takumi, session, rest))
+    .execute((session, { rest }) => snapcode(ctx, session, rest))
 }
 
 /**
  * sc 命令：将代码文件片段渲染为图片
  * 用法：sc <文件路径> [起始行] [~结束行]，如 `sc src/index.ts 10~30`
  */
-export const snapcode = async (ctx: PluginCtx, takumi: TakumiService, session: Session, rest: string) => {
+export const snapcode = async (ctx: PluginCtx, session: Session, rest: string) => {
   const match = rest.trim().match(/^(.+?)(?:\s+(\d+)(?:~(\d+))?)?$/)
   if (!match) return
   const [, rawPath, startStr, endStr] = match
@@ -197,7 +196,7 @@ export const snapcode = async (ctx: PluginCtx, takumi: TakumiService, session: S
 
   /** render 依赖 @takumi-rs/helpers，懒加载以避免未安装 takumi 时插件加载失败 */
   const { render } = await import('./render')
-  const img = await render(takumi, 'snapcode/index', {
+  const img = await render(ctx.takumi!, 'snapcode/index', {
     fileName,
     filePath: relFromCwd || fullPath,
     totalLines,
