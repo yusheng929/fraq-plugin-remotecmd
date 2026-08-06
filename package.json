@@ -1,7 +1,7 @@
 {
   "name": "fraq-plugin-remotecmd",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "基于fraq编写的通过Bot远程执行shell和js命令",
   "files": [
     "dist",
