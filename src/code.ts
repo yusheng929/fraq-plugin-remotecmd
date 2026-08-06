@@ -22,6 +22,7 @@ export const registerCode = (ctx: PluginCtx) => {
         const sandbox = {
           ...global,
           ...globalThis,
+          ...fraq,
           fraq,
           ctx,
           session,

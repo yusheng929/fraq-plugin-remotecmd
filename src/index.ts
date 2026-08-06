@@ -1,4 +1,4 @@
-import { definePlugin } from '@fraqjs/fraq'
+import { definePlugin, serviceToken } from '@fraqjs/fraq'
 import { Master } from 'fraq-plugin-master'
 
 import { registerCode } from './code'
@@ -6,6 +6,7 @@ import { registerSnapcode } from './snapcode'
 import { pluginName, resolveTakumi } from './utils'
 
 import { createRequire } from 'node:module'
+import type { TakumiService } from '@fraqjs/plugin-takumi'
 
 const require = createRequire(import.meta.url)
 
@@ -21,6 +22,9 @@ export const RunCmdPlugin = definePlugin({
   name: pluginName,
   inject: {
     master: Master,
+  },
+  optionalInject: {
+    takumi: serviceToken<TakumiService>('takumi/TakumiService'),
   },
   apply (ctx) {
     registerCode(ctx)
