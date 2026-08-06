@@ -3,7 +3,7 @@ import { param, seg } from '@fraqjs/fraq'
 import hljs from 'highlight.js'
 import shell from 'highlight.js/lib/languages/powershell'
 
-import { formatLine, type PluginCtx, RunJs, resolveTakumi, runShell, stripAnsi } from './utils'
+import { formatLine, type PluginCtx, RunJs, runShell, stripAnsi } from './utils'
 
 import os from 'node:os'
 
@@ -20,7 +20,10 @@ export const registerCode = (ctx: PluginCtx) => {
       try {
         ctx.logger.info(`[RunJavaScript] 执行代码: \n${code}`)
         const sandbox = {
+          ...global,
+          ...globalThis,
           ...fraq,
+          fraq,
           ctx,
           session,
           console,
@@ -29,6 +32,8 @@ export const registerCode = (ctx: PluginCtx) => {
           clearTimeout,
           clearInterval,
           Buffer,
+          global,
+          globalThis,
           process,
         }
         const result = await RunJs(code, sandbox)
@@ -55,19 +60,14 @@ export const registerCode = (ctx: PluginCtx) => {
     .execute(async (session, { cmd }) => {
       const msg = session.raw.segments.find((i) => i.type === 'text')?.data.text
       if (!msg) return
-      /** 通过别名 rcp 触发时以图片形式回复 */
       const isPic = msg.startsWith('rcp')
       const username = os.userInfo().username
       const hostname = os.hostname()
       const cwd = process.cwd()
-      /** 终端提示符路径：Windows 以 > 结尾，Linux 下 /root 缩写为 ~；root 用户用 # 否则用 $ */
       const displayPath = os.platform() === 'win32' ? `${cwd}>` : cwd.replace(/^\/root/, '~')
       const symbol = username === 'root' ? '#' : '$'
       const { output } = await runShell(ctx, cmd)
-      /** takumi 服务在命令执行时按需解析，与插件 apply 顺序解耦 */
-      const takumi = isPic ? await resolveTakumi(ctx) : undefined
-      if (isPic && takumi) {
-        /** render 依赖 @takumi-rs/helpers，懒加载以避免未安装 takumi 时插件加载失败 */
+      if (isPic && ctx.takumi) {
         const { render } = await import('./render')
         const lines = output
           .split(/\r?\n/)
@@ -77,7 +77,7 @@ export const registerCode = (ctx: PluginCtx) => {
         const outputHtml = lines.length
           ? `<div class="out-lines">${lines.map((l) => `<div class="out-row"><span class="lt">${l}</span></div>`).join('')}</div>`
           : '<div class="out-empty">— no output —</div>'
-        const img = await render(takumi, 'runcode/index', {
+        const img = await render(ctx.takumi, 'runcode/index', {
           user: username,
           host: hostname,
           path: displayPath,
